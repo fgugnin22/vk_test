@@ -7,14 +7,17 @@
 Скачать [Docker Desktop](https://www.docker.com/products/docker-desktop/), если еще не установлен.
 
 Добавить новую строку в файл hosts:
+
 ```
 127.0.0.1 task.loc
 ```
+
 На Linux и macOS этот файл располагается по пути `/etc/hosts`, на Windows — `C:\Windows\System32\drivers\etc\hosts`. Для редактирования потребуются права администратора.
 
 ## Запуск и работа с приложением
 
 Запустить приложение:
+
 ```bash
 docker-compose up -d
 ```
@@ -24,6 +27,7 @@ docker-compose up -d
 После успешного запуска приложение станет доступно по адресу http://task.loc.
 
 Остановить приложение:
+
 ```bash
 docker-compose down
 ```
@@ -31,18 +35,31 @@ docker-compose down
 Остановка и повторный запуск могут потребоваться в случае, если вы меняли конфиг nginx.
 
 Выполнить одну из команд Composer:
+
 ```bash
 docker-compose exec -w /var/www/task.loc php composer <команда>
 ```
+
 Например, `composer install` будет вызываться следующим образом:
+
 ```bash
 docker-compose exec -w /var/www/task.loc php composer install
 ```
 
 Для подключения к базе данных MySQL используются следующие данные:
+
 - Host: mysql
 - Имя пользователя: root
 - Пароль: secret
 - Имя базы данных: task
 - Порт: 3306
-При желании, данные можно поменять в файле `docker-compose.yml`.
+  При желании, данные можно поменять в файле `docker-compose.yml`.
+
+#### Создание структуры таблицы(например, через exec в docker desktop)
+
+```sql
+ALTER TABLE example
+ADD supplier_email VARCHAR(255),
+ADD count INT,
+ADD price DECIMAL(10, 2);
+```
