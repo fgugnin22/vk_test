@@ -90,10 +90,15 @@
 
 .column-lg {
     width: 40%;
+    justify-content: space-between;
+    padding: 0 30px;
 }
 
 .column-md {
-    width: 32%
+    width: 32%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
 }
 
 .column-sm {
@@ -102,16 +107,82 @@
 
 .row {
     display: flex;
-    border: 2px solid var(--dark);
+    border-bottom: 2px solid var(--dark);
+    border-left: 2px solid var(--dark);
+    border-right: 2px solid var(--dark);
     height: 80px;
 }
 
 .row:first-of-type {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    border-top: 2px solid var(--dark);
 }
 
 .row:last-of-type {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+}
+
+.product-name {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    color: black;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    font-size: 1.5rem;
+    height: 100%;
+    cursor: pointer;
+    transition: 50ms color linear;
+}
+
+.product-name:hover {
+    color: blue;
+}
+
+.product-count {
+    width: 50px;
+    height: 50px;
+    border-radius: 9999px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--dark);
+    color: white;
+    text-align: center;
+}
+
+.filter-btn {
+    position: absolute;
+    right: 20px;
+    border: none;
+    background-color: transparent;
+    top: 0;
+    cursor: pointer;
+    padding: 0;
+    width: 50px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 0 0 0;
+}
+
+.mutate-btn {
+    background-color: transparent;
+    padding: 15px 0;
+    border: 2px solid var(--dark);
+    border-radius: 10px;
+    width: 40%;
+    font-size: 1.1rem;
+    transition: 50ms background linear;
+}
+
+.mutate-btn:hover {
+    background-color: #EEEEEE;
+}
+
+.mutate-btn:active {
+    background-color: #999999;
 }

@@ -1,6 +1,8 @@
 body {
     font-family: sans-serif;
     box-sizing: border-box;
+    min-width: 100vh;
+    overflow-y: scroll;
 }
 
 img {
