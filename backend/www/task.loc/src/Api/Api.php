@@ -21,7 +21,7 @@ class Api
     $uri = $_SERVER['REQUEST_URI'];
 
     if (str_starts_with($uri, self::base_path)) {
-      $path = str_replace(self::base_path, "", $uri);
+      $path = strtok(str_replace(self::base_path, "", $uri), '?');
 
       $controller = new (self::routes[$path])();
 
