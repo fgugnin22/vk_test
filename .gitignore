@@ -3,4 +3,5 @@ mysql
 node_modules
 .git
 vendor
+static
 dist

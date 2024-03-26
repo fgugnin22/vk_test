@@ -4,7 +4,7 @@
     "allowJs": false,
     "jsx": "react",
     "moduleResolution": "node",
-    "outDir": "./dist",
+    "outDir": "../backend/www/task.loc/static",
     "strict": true,
     "esModuleInterop": true
   },

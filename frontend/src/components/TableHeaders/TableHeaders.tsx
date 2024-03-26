@@ -1,6 +1,6 @@
 import React from "react";
-import img from "../public/triangle.svg";
-import { SetSort } from "../types";
+import img from "../../public/triangle.svg";
+import { SetSort } from "../../types";
 
 type TableHeadersProps = {
   setSort: SetSort;

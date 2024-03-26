@@ -1,0 +1,107 @@
+.modal-backdrop {
+    position: absolute;
+    top: -20px;
+    background-color: black;
+    opacity: 0.1;
+    width: 100%;
+    height: calc(100% + 20px);
+}
+
+.modal-root {
+    position: fixed;
+    z-index: 10;
+    top: 200px;
+    width: 500px;
+    height: 500px;
+    background: white;
+    left: calc(50% - 250px);
+    border: 2px solid var(--dark);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px 0 20px 20px;
+    font-size: 1.2rem;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: 2px solid var(--dark);
+    background-color: transparent;
+    border-radius: 10px;
+    width: 80px;
+    height: 50px;
+    transition: 50ms background linear;
+}
+
+.modal-close-btn::before {
+    position: absolute;
+    top: 48%;
+    left: 26%;
+    content: "";
+    width: 50%;
+    height: 1px;
+    background: var(--dark);
+    z-index: 10;
+    transform: rotate(45deg);
+}
+
+.modal-close-btn::after {
+    position: absolute;
+    top: 48%;
+    left: 26%;
+    content: "";
+    width: 50%;
+    height: 1px;
+    background: var(--dark);
+    z-index: 10;
+    transform: rotate(-45deg);
+}
+
+.modal-close-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.modal-form-label {
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;
+    gap: 10px;
+    font-weight: 500;
+}
+
+.modal-form-input {
+    font-size: 1.3rem;
+    padding: 5px;
+    border: 3px solid var(--dark);
+    border-radius: 5px;
+}
+
+.modal-form-input:user-valid {
+    border-color: green;
+}
+
+.modal-form-input:user-invalid {
+    border-color: red;
+}
+
+.modal-form-submit-btn {
+    margin-right: auto;
+    border: 2px solid var(--dark);
+    border-radius: 10px;
+    padding: 10px;
+    width: 150px;
+    background-color: white;
+    font-size: inherit;
+    transition: 50ms background linear;
+}
+
+.modal-form-submit-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.modal-form-submit-btn:active {
+    background-color: rgba(0, 0, 0, 0.4);
+}

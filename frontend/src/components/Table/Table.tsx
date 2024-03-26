@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import "./table.css";
-import TableHeaders from "../../TableHeaders/TableHeaders";
+import TableHeaders from "../TableHeaders/TableHeaders";
 
 import ProductRow from "../ProductRow/ProductRow";
-import { useAppSelector } from "../../store";
+import { useAppDispatch, useAppSelector } from "../../store";
+import { openModal } from "../../store/slice";
 
 const Table: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   const products = useAppSelector((state) => state.main.products);
 
   const [search, setSearch] = useState("");
@@ -46,12 +49,18 @@ const Table: React.FC = () => {
     setSearch(e.target.value);
   };
 
+  const handleAddButtonClick = () => {
+    dispatch(openModal({ product: null, operation: "ADD" }));
+  };
+
   return (
     <section className="table-root container">
       <h2 className="table-heading">Таблица товаров</h2>
       <div className="flex justify-between">
         <input className="search-bar" onChange={handleSearchChange} />
-        <button className="add-product-btn">Добавить</button>
+        <button className="add-product-btn" onClick={handleAddButtonClick}>
+          Добавить
+        </button>
       </div>
       <div className="table-rows">
         <TableHeaders setSort={setSort} />
