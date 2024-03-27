@@ -9,8 +9,6 @@ import {
   getProductById
 } from "./thunks";
 
-import { products } from "../mock";
-
 export type RootState = {
   searchString: string;
   modal: {
@@ -30,7 +28,7 @@ const initialState: RootState = {
     operation: "ADD"
   },
   isLoading: false,
-  products: products
+  products: []
 };
 
 export const slice = createSlice({
@@ -164,7 +162,6 @@ export const slice = createSlice({
       })
 });
 
-// Action creators are generated for each case reducer function
 export const { openModal, closeModal } = slice.actions;
 
 export default slice.reducer;

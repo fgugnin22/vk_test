@@ -78,12 +78,12 @@ export const deleteProduct = createAsyncThunk<DeleteProductResult, number>(
   "products/delete",
   async (productId: number): Promise<DeleteProductResult> => {
     try {
-      const res = await fetch(
-        `${ROOT_API_URL}/products/delete?id=${productId}`,
-        {
-          method: "DELETE"
-        }
-      );
+      const res = await fetch(`${ROOT_API_URL}/products/delete`, {
+        method: "DELETE",
+        body: JSON.stringify({
+          id: productId
+        })
+      });
 
       const data: DeleteProductResult = await res.json();
 

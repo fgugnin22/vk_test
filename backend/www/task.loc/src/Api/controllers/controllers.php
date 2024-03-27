@@ -16,6 +16,7 @@ $opt = [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
     PDO::ATTR_EMULATE_PREPARES => false,
+    PDO::ERRMODE_WARNING => true,
 ];
 global $pdo;
 $pdo = new PDO($dsn, $user, $pass, $opt);
@@ -65,11 +66,12 @@ class Response
         $this->body = $body;
         $this->code = $code;
 
-        http_response_code($this->code);
     }
 
     public function get_body(): string|bool
     {
+        http_response_code($this->code);
+
         return json_encode($this->body);
     }
 }
@@ -152,8 +154,7 @@ class Edit_product
                     `name` = '$name',
                     `supplier_email` = '$supplier_email',
                     `count` = '$count',
-                    `price` = '$price'
-                WHERE `id` = '$id';";
+                    `price` = '$price' WHERE `id` = '$id';";
 
         $sql_retrieve = "SELECT * FROM `example` WHERE `id` = '$id';";
 
@@ -161,11 +162,16 @@ class Edit_product
 
         $is_success = $query->execute($sql_update);
 
-        if ($is_success == false) {
+        if ($is_success === false) {
+            print ("1");
             return new Response(null, 400);
         }
 
         $product = $query->getOne($sql_retrieve);
+
+        if ($product === false) {
+            return new Response(null, 400);
+        }
 
         $product["price"] = floatval($product["price"]);
 
@@ -212,7 +218,7 @@ class Add_product
 
         $is_success = $query->execute($sql_insert);
 
-        if ($is_success == false) {
+        if ($is_success === false) {
             return new Response(null, 400);
         }
 
@@ -235,10 +241,8 @@ class Delete_product
 
         $product_id = $jsonData['id'];
 
-        $bad_request_response = new Response(['isDeleted' => false, 'deletedId' => -1], 400);
-
         if (!is_numeric($product_id)) {
-            return $bad_request_response;
+            return new Response(['isDeleted' => false, 'deletedId' => -1], 400);
         }
 
         $sql_delete = "DELETE FROM `example` WHERE `id` = '$product_id';";
@@ -247,8 +251,8 @@ class Delete_product
 
         $is_success = $query->execute($sql_delete);
 
-        if ($is_success == false) {
-            return $bad_request_response;
+        if ($is_success === false) {
+            return new Response(['isDeleted' => false, 'deletedId' => -1], 400);
         }
 
         return new Response(['isDeleted' => true, 'deletedId' => $product_id], 200);

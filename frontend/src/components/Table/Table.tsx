@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./table.css";
 import TableHeaders from "../TableHeaders/TableHeaders";
 
 import ProductRow from "../ProductRow/ProductRow";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { openModal } from "../../store/slice";
+import { getAllProducts } from "../../store/thunks";
 
 const Table: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -52,6 +53,10 @@ const Table: React.FC = () => {
   const handleAddButtonClick = () => {
     dispatch(openModal({ product: null, operation: "ADD" }));
   };
+
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, []);
 
   return (
     <section className="table-root container">

@@ -50,7 +50,9 @@ const Modal: React.FC = () => {
 
     const formData = {
       ...formState,
-      price: parseFloat(formState.price),
+      price: parseFloat(
+        formState.price.replaceAll(",", "").replaceAll("$", "")
+      ),
       id: OBJECT_ID_BEFORE_CREATION
     };
 
@@ -66,7 +68,6 @@ const Modal: React.FC = () => {
 
   const handleInputInvalid = (e: React.FormEvent<HTMLInputElement>) => {
     const input = e.target as HTMLInputElement;
-    console.log("123");
     switch (true) {
       case input.name === "name":
         input.setCustomValidity(

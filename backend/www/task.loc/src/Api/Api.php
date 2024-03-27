@@ -23,11 +23,11 @@ class Api
     if (str_starts_with($uri, self::base_path)) {
       $path = strtok(str_replace(self::base_path, "", $uri), '?');
 
+      header('Content-Type: application/json; charset=utf-8');
+
       $controller = new (self::routes[$path])();
 
       $response = $controller();
-
-      header('Content-Type: application/json; charset=utf-8');
 
       echo $response->get_body();
     }
