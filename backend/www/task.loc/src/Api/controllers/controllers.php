@@ -159,7 +159,11 @@ class Edit_product
 
         $query = new Query();
 
-        $query->execute($sql_update);
+        $is_success = $query->execute($sql_update);
+
+        if ($is_success == false) {
+            return new Response(null, 400);
+        }
 
         $product = $query->getOne($sql_retrieve);
 
@@ -194,25 +198,23 @@ class Add_product
             return new Response(null, 400);
         }
 
-        $id = $jsonData['id'];
         $name = $jsonData['name'];
         $supplier_email = $jsonData['supplier_email'];
         $count = $jsonData['count'];
         $price = $jsonData['price'];
 
 
-        $sql_update = "UPDATE `example` SET
-                    `name` = '$name',
-                    `supplier_email` = '$supplier_email',
-                    `count` = '$count',
-                    `price` = '$price'
-                WHERE `id` = '$id';";
+        $sql_insert = "INSERT INTO `example` (`name`, `supplier_email`, `count`, `price`) VALUES ('$name', '$supplier_email', '$count', '$price')";
 
-        $sql_retrieve = "SELECT * FROM `example` WHERE `id` = '$id';";
+        $sql_retrieve = "SELECT * FROM `example` WHERE `id` = LAST_INSERT_ID();";
 
         $query = new Query();
 
-        $query->execute($sql_update);
+        $is_success = $query->execute($sql_insert);
+
+        if ($is_success == false) {
+            return new Response(null, 400);
+        }
 
         $product = $query->getOne($sql_retrieve);
 
@@ -227,7 +229,29 @@ class Delete_product
 {
     public function __invoke()
     {
-        echo "good";
+        $postData = file_get_contents('php://input');
+
+        $jsonData = json_decode($postData, true);
+
+        $product_id = $jsonData['id'];
+
+        $bad_request_response = new Response(['isDeleted' => false, 'deletedId' => -1], 400);
+
+        if (!is_numeric($product_id)) {
+            return $bad_request_response;
+        }
+
+        $sql_delete = "DELETE FROM `example` WHERE `id` = '$product_id';";
+
+        $query = new Query();
+
+        $is_success = $query->execute($sql_delete);
+
+        if ($is_success == false) {
+            return $bad_request_response;
+        }
+
+        return new Response(['isDeleted' => true, 'deletedId' => $product_id], 200);
     }
 }
 
