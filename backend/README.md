@@ -18,6 +18,15 @@
 
 Запустить приложение:
 
+/frontend
+
+```bash
+npm install
+npm run build
+```
+
+/backend:
+
 ```bash
 docker-compose up -d
 ```
@@ -54,3 +63,5 @@ docker-compose exec -w /var/www/task.loc php composer install
 - Имя базы данных: task
 - Порт: 3306
   При желании, данные можно поменять в файле `docker-compose.yml`.
+
+Для заполнения базы данных можно воспользоваться скриптом init.sql
