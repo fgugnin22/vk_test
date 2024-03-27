@@ -6,11 +6,14 @@ import ProductRow from "../ProductRow/ProductRow";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { openModal } from "../../store/slice";
 import { getAllProducts } from "../../store/thunks";
+import Loader from "../Loader/Loader";
 
 const Table: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const products = useAppSelector((state) => state.main.products);
+
+  const isLoading = useAppSelector((state) => state.main.isLoading);
 
   const [search, setSearch] = useState("");
 
@@ -69,12 +72,17 @@ const Table: React.FC = () => {
       </div>
       <div className="table-rows">
         <TableHeaders setSort={setSort} />
-        {filteredAndOrderedProducts.map((product) => (
-          <ProductRow
-            key={`product-row-${product.id + product.name}`}
-            product={product}
-          />
-        ))}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          filteredAndOrderedProducts.length > 0 &&
+          filteredAndOrderedProducts.map((product) => (
+            <ProductRow
+              key={`product-row-${product.id + product.name}`}
+              product={product}
+            />
+          ))
+        )}
       </div>
     </section>
   );
