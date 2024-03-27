@@ -54,12 +54,3 @@ docker-compose exec -w /var/www/task.loc php composer install
 - Имя базы данных: task
 - Порт: 3306
   При желании, данные можно поменять в файле `docker-compose.yml`.
-
-#### Создание структуры таблицы(например, через exec в docker desktop)
-
-```sql
-ALTER TABLE example
-ADD supplier_email VARCHAR(255),
-ADD count INT,
-ADD price DECIMAL(10, 2);
-```
