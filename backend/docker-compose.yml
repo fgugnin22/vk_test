@@ -1,7 +1,4 @@
-version: "1"
-
-networks:
-  internal:
+version: "3"
 
 services:
   nginx:
@@ -48,3 +45,6 @@ services:
       MYSQL_PASSWORD: secret
     networks:
       - internal
+
+networks:
+  internal:
