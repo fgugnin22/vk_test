@@ -4,6 +4,7 @@ services:
   nginx:
     image: nginx:stable-alpine
     container_name: nginx
+    restart: unless-stopped
     ports:
       - "80:80"
     volumes:
@@ -20,6 +21,7 @@ services:
       context: ./config/php
       dockerfile: Dockerfile
     container_name: php
+    restart: unless-stopped
     volumes:
       - ./www:/var/www
       - ./config/php/php.ini:/usr/local/etc/php/php.ini
