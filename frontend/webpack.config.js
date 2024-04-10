@@ -6,7 +6,7 @@ module.exports = {
     entry: './src/index.tsx',
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname + "/../backend/www/task.loc", 'static')
+        path: path.resolve(__dirname + "/../backend-vk/www/task.loc", 'static')
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js']
